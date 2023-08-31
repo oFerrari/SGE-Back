@@ -1,6 +1,8 @@
-package br.com.anpede.dto;
+package br.com.sge.dto;
 
 import java.io.Serializable;
+
+import br.com.sge.entities.Cliente;
 
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +30,7 @@ public class ClienteDTO implements Serializable {
 		this.email = email;
 	}
 	
-	public ClienteDTO(ClienteDTO entity) {
+	public ClienteDTO(Cliente entity) {
 
 		this.id = entity.getId();
 		this.nome = entity.getNome();

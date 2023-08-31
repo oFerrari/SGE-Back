@@ -1,4 +1,4 @@
-package br.com.anpede.entities;
+package br.com.sge.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
