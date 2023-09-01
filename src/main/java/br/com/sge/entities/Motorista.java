@@ -7,32 +7,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_cliente")
-public class Cliente implements Serializable{
+public class Motorista implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String tipo;
+	private String CNH;
 	private String CPF;
 	private String endereco;
 	private String telefone;
 	private String email;
 	
-	public Cliente() {
+	public Motorista() {
 		
 	}
 
-	public Cliente(Long id, String nome, String tipo, String CPF, String endereco, String telefone, String email) {
+	public Motorista(Long id, String nome, String CNH, String CPF, String endereco, String telefone, String email) {
 
 		this.id = id;
 		this.nome = nome;
-		this.tipo = tipo;
+		this.CNH = CNH;
 		this.CPF = CPF;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -55,12 +53,12 @@ public class Cliente implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getCNH() {
+		return CNH;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setCNH(String CNH) {
+		this.CNH = CNH;
 	}
 
 	public String getCPF() {
@@ -97,7 +95,7 @@ public class Cliente implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(CPF, email, endereco, id, nome, telefone, tipo);
+		return Objects.hash(CPF, email, endereco, id, nome, telefone, CNH);
 	}
 
 	@Override
@@ -108,11 +106,11 @@ public class Cliente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Motorista other = (Motorista) obj;
 		return Objects.equals(CPF, other.CPF) && Objects.equals(email, other.email)
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id)
 				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone)
-				&& Objects.equals(tipo, other.tipo);
+				&& Objects.equals(CNH, other.CNH);
 	}
 	
 	
