@@ -40,7 +40,7 @@ public class ClienteService {
 		Cliente entity = new Cliente();
 		entity.setNome(dto.getNome());
 		entity.setTipo(dto.getTipo());
-		entity.setCPF(dto.getCPF());
+		entity.setDocumento(dto.getDocumento());
 		entity.setEndereco(dto.getEndereco());
 		entity.setTelefone(dto.getTelefone());
 		entity.setEmail(dto.getEmail());
@@ -56,7 +56,7 @@ public class ClienteService {
 			Cliente entity = repository.getReferenceById(id);
 			entity.setNome(dto.getNome());
 			entity.setTipo(dto.getTipo());
-			entity.setCPF(dto.getCPF());
+			entity.setDocumento(dto.getDocumento());
 			entity.setEndereco(dto.getEndereco());
 			entity.setTelefone(dto.getTelefone());
 			entity.setEmail(dto.getEmail());

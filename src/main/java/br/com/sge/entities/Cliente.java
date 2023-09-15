@@ -19,7 +19,7 @@ public class Cliente implements Serializable{
 	private Long id;
 	private String nome;
 	private String tipo;
-	private String CPF;
+	private String documento;
 	private String endereco;
 	private String telefone;
 	private String email;
@@ -28,12 +28,12 @@ public class Cliente implements Serializable{
 		
 	}
 
-	public Cliente(Long id, String nome, String tipo, String CPF, String endereco, String telefone, String email) {
+	public Cliente(Long id, String nome, String tipo, String documento, String endereco, String telefone, String email) {
 
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
-		this.CPF = CPF;
+		this.documento = documento;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
@@ -63,12 +63,12 @@ public class Cliente implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getDocumento() {
+		return documento;
 	}
 
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 
 	public String getEndereco() {
@@ -97,7 +97,7 @@ public class Cliente implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(CPF, email, endereco, id, nome, telefone, tipo);
+		return Objects.hash(documento, email, endereco, id, nome, telefone, tipo);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class Cliente implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		return Objects.equals(CPF, other.CPF) && Objects.equals(email, other.email)
+		return Objects.equals(documento, other.documento) && Objects.equals(email, other.email)
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id)
 				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone)
 				&& Objects.equals(tipo, other.tipo);

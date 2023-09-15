@@ -10,7 +10,7 @@ public class ClienteDTO implements Serializable {
 	private Long id;
 	private String nome;
 	private String tipo;
-	private String CPF;
+	private String documento;
 	private String endereco;
 	private String telefone;
 	private String email;
@@ -19,12 +19,12 @@ public class ClienteDTO implements Serializable {
 		
 	}
 
-	public ClienteDTO(Long id, String nome, String tipo, String CPF, String endereco, String telefone, String email) {
+	public ClienteDTO(Long id, String nome, String tipo, String documento, String endereco, String telefone, String email) {
 
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
-		this.CPF = CPF;
+		this.documento = documento;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
@@ -35,7 +35,7 @@ public class ClienteDTO implements Serializable {
 		this.id = entity.getId();
 		this.nome = entity.getNome();
 		this.tipo = entity.getTipo();
-		this.CPF = entity.getCPF();
+		this.documento = entity.getDocumento();
 		this.endereco = entity.getEndereco();
 		this.telefone = entity.getTelefone();
 		this.email = entity.getEmail();
@@ -65,12 +65,12 @@ public class ClienteDTO implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getDocumento() {
+		return documento;
 	}
 
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
+	public void setdocumento(String documento) {
+		this.documento = documento;
 	}
 
 	public String getEndereco() {
