@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +26,10 @@ public class Motorista implements Serializable{
 	private String telefone;
 	private String email;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_veiculo_fk")
+	private Veiculo veiculo;
+	
 	public Motorista() {
 		
 	}
@@ -37,6 +43,17 @@ public class Motorista implements Serializable{
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
+		
+		
+	}
+	
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	public Long getId() {

@@ -1,12 +1,17 @@
 package br.com.sge.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_veiculo")
@@ -21,16 +26,27 @@ public class Veiculo implements Serializable{
 	private String modelo;
 	private String capacidade;
 	
+	@OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Motorista> motorista;
+	
 	public Veiculo() {
 		
 	}
-	public Veiculo(Long id, String placa, String documento, String modelo, String capacidade) {
+	public Veiculo(Long id, String placa, String documento, String modelo, String capacidade, List<Motorista> motorista) {
 
 		this.id = id;
 		this.placa = placa;
 		this.documento = documento;
 		this.modelo = modelo;
 		this.capacidade = capacidade;
+		this.motorista = motorista;
+	}
+	
+	
+	
+	public List<Motorista> getMotorista() {
+		return motorista;
 	}
 	public Long getId() {
 		return id;
