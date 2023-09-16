@@ -33,27 +33,27 @@ public class VeiculoResource {
 	
 	@GetMapping
 	@RequestMapping(value = "/{id}")
-	public ResponseEntity<VeiculoDTO> findById(@PathVariable Long id){	
+	public ResponseEntity<VeiculoDTO> findById(@PathVariable Long id) {
 		VeiculoDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<VeiculoDTO> insert(@RequestBody VeiculoDTO dto){	
+	public ResponseEntity<VeiculoDTO> insert(@RequestBody VeiculoDTO dto) {
 		service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(null);
-		
+
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<VeiculoDTO> update(@PathVariable Long id, @RequestBody VeiculoDTO dto){ 
-	dto = service.update(id, dto);
-	return ResponseEntity.ok().body(dto);
+	public ResponseEntity<VeiculoDTO> update(@PathVariable Long id, @RequestBody VeiculoDTO dto) {
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
