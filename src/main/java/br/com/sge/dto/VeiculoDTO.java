@@ -1,6 +1,11 @@
 package br.com.sge.dto;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.sge.entities.Motorista;
 import br.com.sge.entities.Veiculo;
@@ -14,7 +19,15 @@ public class VeiculoDTO implements Serializable {
 	private String renavam;
 	private String modelo;
 	private String capacidade;
+	
+	private List<Motorista> motorista = new ArrayList<>();
+
 	private Motorista motorista;
+
+	
+
+
+
 
 	public VeiculoDTO() {
 		
@@ -39,7 +52,24 @@ public class VeiculoDTO implements Serializable {
 		this.capacidade = entity.getCapacidade();
 
 	}
+	public VeiculoDTO(Veiculo entidade, List<Motorista> motoristas) {
+	    this(entidade);
+	    this.motorista = motoristas.stream().map(x -> new Motorista(
+	            x.getId(), x.getNome(), x.getCNH(), x.getCPF(), x.getEndereco(), x.getTelefone(), x.getEmail()))
+	            .collect(Collectors.toList());
+	}
+	public VeiculoDTO(Veiculo entidade, List<Motorista> motoristas) {
+	    this(entidade);
+	    this.motorista = motoristas.stream().map(x -> new Motorista(
+	            x.getId(), x.getNome(), x.getCNH(), x.getCPF(), x.getEndereco(), x.getTelefone(), x.getEmail()))
+	            .collect(Collectors.toList());
+	}
 
+	public List<Motorista> getMotorista() {
+		return motorista;
+	}
+
+	
 	public Long getId() {
 		return id;
 	}
