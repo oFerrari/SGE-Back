@@ -1,18 +1,16 @@
 package br.com.sge.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "tb_veiculo")
 public class Veiculo implements Serializable{
@@ -22,32 +20,28 @@ public class Veiculo implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String placa;
-	private String documento;
+	private String renavam;
 	private String modelo;
 	private String capacidade;
 	
-	@OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Motorista> motorista;
+	@ManyToOne
+	@JoinColumn(name = "id_motorista_fk")
+	private Motorista motorista;
 	
 	public Veiculo() {
 		
 	}
-	public Veiculo(Long id, String placa, String documento, String modelo, String capacidade, List<Motorista> motorista) {
+	
+	public Veiculo(Long id, String placa, String renavam, String modelo, String capacidade) {
 
 		this.id = id;
 		this.placa = placa;
-		this.documento = documento;
+		this.renavam = renavam;
 		this.modelo = modelo;
 		this.capacidade = capacidade;
-		this.motorista = motorista;
 	}
 	
 	
-	
-	public List<Motorista> getMotorista() {
-		return motorista;
-	}
 	public Long getId() {
 		return id;
 	}
@@ -60,11 +54,11 @@ public class Veiculo implements Serializable{
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public String getDocumento() {
-		return documento;
+	public String getRenavam() {
+		return renavam;
 	}
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
 	}
 	public String getModelo() {
 		return modelo;
@@ -77,13 +71,19 @@ public class Veiculo implements Serializable{
 	}
 	public void setCapacidade(String capacidade) {
 		this.capacidade = capacidade;
+	}	
+	
+	public Motorista getMotorista() {
+		return motorista;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(capacidade, documento, id, modelo, placa);
+		return Objects.hash(id);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -94,7 +94,7 @@ public class Veiculo implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Veiculo other = (Veiculo) obj;
-		return Objects.equals(capacidade, other.capacidade) && Objects.equals(documento, other.documento)
+		return Objects.equals(capacidade, other.capacidade) && Objects.equals(renavam, other.renavam)
 				&& Objects.equals(id, other.id) && Objects.equals(modelo, other.modelo)
 				&& Objects.equals(placa, other.placa);
 	}

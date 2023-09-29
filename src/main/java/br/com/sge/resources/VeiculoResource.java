@@ -19,7 +19,7 @@ import br.com.sge.dto.VeiculoDTO;
 import br.com.sge.services.VeiculoService;
 
 @RestController
-@RequestMapping(value = "/veiculo")
+@RequestMapping(value = "/veiculos")
 public class VeiculoResource {
 	
 	@Autowired
@@ -40,8 +40,12 @@ public class VeiculoResource {
 
 	@PostMapping
 	public ResponseEntity<VeiculoDTO> insert(@RequestBody VeiculoDTO dto) {
-		service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder
+					.fromCurrentRequest()
+					.path("/{id}")
+					.buildAndExpand(dto.getId())
+					.toUri();
 		return ResponseEntity.created(uri).body(null);
 
 	}

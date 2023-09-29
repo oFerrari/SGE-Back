@@ -1,8 +1,12 @@
 package br.com.sge.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.sge.entities.Motorista;
+import br.com.sge.entities.Veiculo;
 
 public class MotoristaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,8 +19,10 @@ public class MotoristaDTO implements Serializable {
 	private String telefone;
 	private String email;
 
+	private List<Veiculo> veiculos = new ArrayList<>();
+
 	public MotoristaDTO() {
-		
+
 	}
 
 	public MotoristaDTO(Long id, String nome, String CNH, String CPF, String endereco, String telefone, String email) {
@@ -29,7 +35,7 @@ public class MotoristaDTO implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 	}
-	
+
 	public MotoristaDTO(Motorista entity) {
 
 		this.id = entity.getId();
@@ -39,6 +45,19 @@ public class MotoristaDTO implements Serializable {
 		this.endereco = entity.getEndereco();
 		this.telefone = entity.getTelefone();
 		this.email = entity.getEmail();
+	}
+	
+	public MotoristaDTO(Motorista entity, List<Veiculo> veiculos) {
+	    this(entity);
+	    this.veiculos = veiculos.stream()
+	        .map(x -> new Veiculo(x.getId(), x.getPlaca(), x.getRenavam(), x.getModelo(), x.getCapacidade()))
+	        .collect(Collectors.toList());
+	}
+
+
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
 	}
 
 	public Long getId() {
@@ -96,6 +115,5 @@ public class MotoristaDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 }

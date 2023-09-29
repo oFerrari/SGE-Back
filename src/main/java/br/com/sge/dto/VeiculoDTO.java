@@ -2,6 +2,7 @@ package br.com.sge.dto;
 
 import java.io.Serializable;
 
+import br.com.sge.entities.Motorista;
 import br.com.sge.entities.Veiculo;
 
 public class VeiculoDTO implements Serializable {
@@ -10,33 +11,33 @@ public class VeiculoDTO implements Serializable {
 
 	private Long id;
 	private String placa;
-	private String documento;
+	private String renavam;
 	private String modelo;
 	private String capacidade;
-
+	private Motorista motorista;
 
 	public VeiculoDTO() {
 		
 	}
 
-	public VeiculoDTO(Long id, String placa, String documento, String Modelo, String capacidade) {
+	public VeiculoDTO(Long id, String placa, String renavam, String modelo, String capacidade) {
 
 		this.id = id;
 		this.placa = placa;
-		this.documento = documento;
-		this.modelo = Modelo;
+		this.renavam = renavam;
+		this.modelo = modelo;
 		this.capacidade = capacidade;
-	
+
 	}
 	
 	public VeiculoDTO(Veiculo entity) {
 
 		this.id = entity.getId();
 		this.placa = entity.getPlaca();
-		this.documento= entity.getDocumento();
+		this.renavam= entity.getRenavam();
 		this.modelo = entity.getModelo();
 		this.capacidade = entity.getCapacidade();
-		
+
 	}
 
 	public Long getId() {
@@ -55,12 +56,12 @@ public class VeiculoDTO implements Serializable {
 		this.placa = placa;
 	}
 
-	public String getDocumento() {
-		return documento;
+	public String getRenavam() {
+		return renavam;
 	}
 
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
 	}
 
 	public String getModelo() {
@@ -79,9 +80,14 @@ public class VeiculoDTO implements Serializable {
 		this.capacidade = capacidade;
 	}
 
-	
+	public Motorista getMotorista() {
+		return motorista;
+	}
+
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
+	}
 
 	
-
 
 }

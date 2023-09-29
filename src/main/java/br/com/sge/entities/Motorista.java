@@ -1,15 +1,18 @@
-	package br.com.sge.entities;
+package br.com.sge.entities;
 	
-	import java.io.Serializable;
-	import java.util.Objects;
-	
-	import jakarta.persistence.Entity;
-	import jakarta.persistence.GeneratedValue;
-	import jakarta.persistence.GenerationType;
-	import jakarta.persistence.Id;
-	import jakarta.persistence.JoinColumn;
-	import jakarta.persistence.ManyToOne;
-	import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 	
 	@Entity
 	@Table(name = "tb_motorista")
@@ -26,15 +29,15 @@
 		private String telefone;
 		private String email;
 		
-		@ManyToOne
-		@JoinColumn(name = "id_veiculo_fk")
-		private Veiculo veiculo;
+		@OneToMany(mappedBy = "motorista", fetch = FetchType.LAZY)
+		@JsonIgnore
+		private List<Veiculo> veiculos;
 		
 		public Motorista() {
 			
 		}
 	
-		public Motorista(Long id, String nome, String CNH, String CPF, String endereco, String telefone, String email, Veiculo veiculo) {
+		public Motorista(Long id, String nome, String CNH, String CPF, String endereco, String telefone, String email, List<Veiculo> veiculos) {
 	
 			this.id = id;
 			this.nome = nome;
@@ -43,7 +46,11 @@
 			this.endereco = endereco;
 			this.telefone = telefone;
 			this.email = email;
-			this.veiculo = veiculo;
+			this.veiculos = veiculos;
+		}
+		
+		public List<Veiculo> getVeiculo() {
+			return veiculos;
 		}
 	
 		public Long getId() {
@@ -100,14 +107,6 @@
 	
 		public void setEmail(String email) {
 			this.email = email;
-		}
-		
-		public Veiculo getVeiculo() {
-			return veiculo;
-		}
-	
-		public void setVeiculo(Veiculo veiculo) {
-			this.veiculo = veiculo;
 		}
 		
 		

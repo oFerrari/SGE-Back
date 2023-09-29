@@ -23,15 +23,13 @@ public class VeiculoService {
 	@Transactional(readOnly = true)
 	public List<VeiculoDTO> findAll() {
 		List<Veiculo> lista = repository.findAll();
-
 		return lista.stream().map(x -> new VeiculoDTO(x)).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly = true)
 	public VeiculoDTO findById(Long id) {
 		Optional<Veiculo> obj = repository.findById(id);
-		Veiculo entity = obj
-				.orElseThrow(() -> new ResourceNotFoundException("O registro solicitado não foi encontrado"));
+		Veiculo entity = obj.orElseThrow(() -> new ResourceNotFoundException("O registro não foi localizado na base de dados"));
 		return new VeiculoDTO(entity);
 	}
 
@@ -39,7 +37,7 @@ public class VeiculoService {
 	public VeiculoDTO insert(VeiculoDTO dto) {
 		Veiculo entity = new Veiculo();
 		entity.setPlaca(dto.getPlaca());
-		entity.setDocumento(dto.getDocumento());
+		entity.setRenavam(dto.getRenavam());
 		entity.setModelo(dto.getModelo());
 		entity.setCapacidade(dto.getCapacidade());
 		
@@ -54,7 +52,7 @@ public class VeiculoService {
 		try {
 			Veiculo entity = repository.getReferenceById(id);
 			entity.setPlaca(dto.getPlaca());
-			entity.setDocumento(dto.getDocumento());
+			entity.setRenavam(dto.getRenavam());
 			entity.setModelo(dto.getModelo());
 			entity.setCapacidade(dto.getCapacidade());
 			
@@ -67,6 +65,14 @@ public class VeiculoService {
 		}
 	}
 
+	private void converterEntityToDTO(Veiculo entity, VeiculoDTO dto) {
+		entity.setPlaca(dto.getPlaca());
+		entity.setRenavam(dto.getRenavam());
+		entity.setModelo(dto.getModelo());
+		entity.setCapacidade(dto.getCapacidade());
+		entity.setMotorista(dto.getMotorista());
+	}
+	
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);

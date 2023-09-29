@@ -23,8 +23,7 @@ public class MotoristaService {
 	@Transactional(readOnly = true)
 	public List<MotoristaDTO> findAll() {
 		List<Motorista> lista = repository.findAll();
-
-		return lista.stream().map(x -> new MotoristaDTO(x)).collect(Collectors.toList());
+		return lista.stream().map(x -> new MotoristaDTO(x, x.getVeiculo())).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly = true)
@@ -68,6 +67,15 @@ public class MotoristaService {
 			throw new ResourceNotFoundException("O recurso com o ID " + id + " não foi localizado");
 		}
 	}
+	
+//	private void converterEntityToDTO(Motorista entity, MotoristaDTO dto) {
+//		entity.setNome(dto.getNome());
+//		entity.setCNH(dto.getCNH());
+//		entity.setCPF(dto.getCPF());
+//		entity.setEndereco(dto.getEndereco());
+//		entity.setTelefone(dto.getTelefone());
+//		entity.setEmail(dto.getEmail());
+//	}
 
 	public void delete(Long id) {
 		try {
