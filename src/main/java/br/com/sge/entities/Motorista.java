@@ -49,9 +49,7 @@ import jakarta.persistence.Table;
 			this.veiculos = veiculos;
 		}
 		
-		public List<Veiculo> getVeiculo() {
-			return veiculos;
-		}
+		
 	
 		public Long getId() {
 			return id;
@@ -107,6 +105,10 @@ import jakarta.persistence.Table;
 	
 		public void setEmail(String email) {
 			this.email = email;
+		}
+		
+		public List<Veiculo> getVeiculo() {
+			return veiculos;
 		}
 		
 		

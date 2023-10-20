@@ -53,12 +53,9 @@ public class MotoristaDTO implements Serializable {
 	        .map(x -> new Veiculo(x.getId(), x.getPlaca(), x.getRenavam(), x.getModelo(), x.getCapacidade()))
 	        .collect(Collectors.toList());
 	}
+	
 
-
-
-	public List<Veiculo> getVeiculos() {
-		return veiculos;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -114,6 +111,10 @@ public class MotoristaDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
 	}
 
 }

@@ -7,7 +7,11 @@ INSERT INTO tb_motorista ( nome, CNH, CPF, endereco, telefone, email) VALUES ( '
 INSERT INTO tb_motorista ( nome, CNH, CPF, endereco, telefone, email) VALUES ( 'Maria Souza', '98765432100', '987.654.321-00', 'Avenida B 456', '(22) 9876-5432', 'maria.souza@example.com');
 INSERT INTO tb_motorista ( nome, CNH, CPF, endereco, telefone, email) VALUES ( 'Pedro Oliveira', '54321098765', '543.210.987-65', 'Rua C 789', '(33) 2345-6789', 'pedro.oliveira@example.com');
 
-INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AAA-1111', '123456789', 'CARROÇA', '250 kg',1);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'OJA-1111', '123456789', 'CARROÇA', '250 kg',1);
 INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AAA-2222', '123456789', 'CARROÇA', '690 kg',2);
-INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AAA-3333', '123456789', 'CARROÇA', '500 kg',3);
-INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AAA-4444', '123456789', 'CARROÇA', '650 kg',4);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'HAA-3333', '123456789', 'CARROÇA', '500 kg',3);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'BAA-5555', '123456789', 'CARROÇA', '650 kg',4);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AAA-6666', '123456789', 'CARROÇA', '250 kg',1);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'ATA-7777', '123456789', 'CARROÇA', '690 kg',2);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AJB-8888', '123456789', 'CARROÇA', '500 kg',3);
+INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'CCC-9999', '123456789', 'CARROÇA', '650 kg',4);

@@ -65,13 +65,13 @@ public class VeiculoService {
 		}
 	}
 
-	private void converterEntityToDTO(Veiculo entity, VeiculoDTO dto) {
-		entity.setPlaca(dto.getPlaca());
-		entity.setRenavam(dto.getRenavam());
-		entity.setModelo(dto.getModelo());
-		entity.setCapacidade(dto.getCapacidade());
-		entity.setMotorista(dto.getMotorista());
-	}
+//	private void converterEntityToDTO(Veiculo entity, VeiculoDTO dto) {
+//		entity.setPlaca(dto.getPlaca());
+//		entity.setRenavam(dto.getRenavam());
+//		entity.setModelo(dto.getModelo());
+//		entity.setCapacidade(dto.getCapacidade());
+//		entity.setMotorista(dto.getMotorista());
+//	}
 	
 	public void delete(Long id) {
 		try {
