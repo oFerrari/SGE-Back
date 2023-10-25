@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +21,6 @@ public class PedidoEntrega implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Cliente cliente;
 	private String mercadoria;
 	private String origem;
 	private String destino;
@@ -28,14 +29,22 @@ public class PedidoEntrega implements Serializable{
 	private StatusPedido statusPedido;
 	
 	
+	@ManyToOne
+	@JoinColumn(name = "id_cliente_fk")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_veiculo_fk")
+	private Veiculo veiculo;
+	
+	
 	public PedidoEntrega() {
 		
 	}
 	
-	public PedidoEntrega(Long id, Cliente cliente, String mercadoria, String origem, String destino,LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido) {
+	public PedidoEntrega(Long id, String mercadoria, String origem, String destino,LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido) {
 
 		this.id = id;
-		this.cliente = cliente;
 		this.mercadoria = mercadoria;
 		this.origem = origem;
 		this.destino = destino;
@@ -48,50 +57,73 @@ public class PedidoEntrega implements Serializable{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+
 	public String getMercadoria() {
 		return mercadoria;
 	}
+
 	public void setMercadoria(String mercadoria) {
 		this.mercadoria = mercadoria;
 	}
+
 	public String getOrigem() {
 		return origem;
 	}
+
 	public void setOrigem(String origem) {
 		this.origem = origem;
 	}
+
 	public String getDestino() {
 		return destino;
 	}
+
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
+
 	public LocalDateTime getEmissao() {
 		return emissao;
 	}
+
 	public void setEmissao(LocalDateTime emissao) {
 		this.emissao = emissao;
 	}
+
 	public LocalDateTime getDataEntrega() {
 		return dataEntrega;
 	}
+
 	public void setDataEntrega(LocalDateTime dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
+
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
+
 	public void setStatusPedido(StatusPedido statusPedido) {
 		this.statusPedido = statusPedido;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	@Override
@@ -113,7 +145,6 @@ public class PedidoEntrega implements Serializable{
 				&& Objects.equals(id, other.id) && Objects.equals(mercadoria, other.mercadoria)
 				&& Objects.equals(origem, other.origem) && statusPedido == other.statusPedido;
 	}
-	
 	
 	
 }

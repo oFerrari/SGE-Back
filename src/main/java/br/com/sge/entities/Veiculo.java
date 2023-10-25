@@ -3,8 +3,6 @@ package br.com.sge.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +26,6 @@ public class Veiculo implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "id_motorista_fk")
-	@JsonIgnore
 	private Motorista motorista;
 	
 	public Veiculo() {

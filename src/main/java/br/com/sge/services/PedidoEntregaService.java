@@ -38,7 +38,7 @@ public class PedidoEntregaService {
 	@Transactional
 	public PedidoEntregaDTO insert(PedidoEntregaDTO dto) {
 		PedidoEntrega entity = new PedidoEntrega();
-		entity.setCliente(dto.getCliente());
+
 		entity.setMercadoria(dto.getMercadoria());
 		entity.setOrigem(dto.getOrigem());
 		entity.setDestino(dto.getDestino());
@@ -55,7 +55,7 @@ public class PedidoEntregaService {
 	public PedidoEntregaDTO update(Long id, PedidoEntregaDTO dto) {
 		try {
 			PedidoEntrega entity = repository.getReferenceById(id);
-			entity.setCliente(dto.getCliente());
+
 			entity.setMercadoria(dto.getMercadoria());
 			entity.setOrigem(dto.getOrigem());
 			entity.setDestino(dto.getDestino());

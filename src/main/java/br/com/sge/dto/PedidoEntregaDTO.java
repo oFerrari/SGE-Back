@@ -3,7 +3,6 @@ package br.com.sge.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import br.com.sge.entities.Cliente;
 import br.com.sge.entities.PedidoEntrega;
 import br.com.sge.entities.enums.StatusPedido;
 
@@ -11,41 +10,44 @@ public class PedidoEntregaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Cliente cliente;
+	private String nomeCliente;
 	private String mercadoria;
 	private String origem;
 	private String destino;
 	private LocalDateTime emissao;
 	private LocalDateTime dataEntrega;
 	private StatusPedido statusPedido;
+	private String nomeVeiculo;
 
 	public PedidoEntregaDTO() {
 		
 	}
 
-	public PedidoEntregaDTO(Long id, Cliente cliente, String mercadoria, String origem, String destino,
-			LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido) {
+	public PedidoEntregaDTO(Long id, String nomeCliente, String mercadoria, String origem, String destino,
+			LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido, String nomeVeiculo) {
 		
 		this.id = id;
-		this.cliente = cliente;
+		this.nomeCliente = nomeCliente;
 		this.mercadoria = mercadoria;
 		this.origem = origem;
 		this.destino = destino;
 		this.emissao = emissao;
 		this.dataEntrega = dataEntrega;
 		this.statusPedido = statusPedido;
+		this.nomeVeiculo = nomeVeiculo;
 	}
 	
 	public PedidoEntregaDTO(PedidoEntrega entity) {
 		
 		this.id = entity.getId();
-		this.cliente = entity.getCliente();
+		this.nomeVeiculo = entity.getCliente().getNome();
 		this.mercadoria = entity.getMercadoria();
 		this.origem = entity.getOrigem();
 		this.destino = entity.getDestino();
 		this.emissao = entity.getEmissao();
 		this.dataEntrega = entity.getDataEntrega();
 		this.statusPedido = entity.getStatusPedido();
+		this.nomeVeiculo = entity.getVeiculo().getPlaca();
 	}
 
 	public Long getId() {
@@ -56,12 +58,12 @@ public class PedidoEntregaDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
 	public String getMercadoria() {
@@ -112,7 +114,15 @@ public class PedidoEntregaDTO implements Serializable {
 		this.statusPedido = statusPedido;
 	}
 
-	
+	public String getNomeVeiculo() {
+		return nomeVeiculo;
+	}
+
+	public void setNomeVeiculo(String nomeVeiculo) {
+		this.nomeVeiculo = nomeVeiculo;
+	}
+
+		
 
 
 }

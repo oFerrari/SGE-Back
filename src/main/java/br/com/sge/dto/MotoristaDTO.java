@@ -19,7 +19,7 @@ public class MotoristaDTO implements Serializable {
 	private String telefone;
 	private String email;
 
-	private List<Veiculo> veiculos = new ArrayList<>();
+	private List<VeiculoDTO> veiculos = new ArrayList<>();
 
 	public MotoristaDTO() {
 
@@ -50,7 +50,7 @@ public class MotoristaDTO implements Serializable {
 	public MotoristaDTO(Motorista entity, List<Veiculo> veiculos) {
 	    this(entity);
 	    this.veiculos = veiculos.stream()
-	        .map(x -> new Veiculo(x.getId(), x.getPlaca(), x.getRenavam(), x.getModelo(), x.getCapacidade()))
+	        .map(x -> new VeiculoDTO(x))
 	        .collect(Collectors.toList());
 	}
 	
@@ -113,7 +113,7 @@ public class MotoristaDTO implements Serializable {
 		this.email = email;
 	}
 	
-	public List<Veiculo> getVeiculos() {
+	public List<VeiculoDTO> getVeiculos() {
 		return veiculos;
 	}
 
