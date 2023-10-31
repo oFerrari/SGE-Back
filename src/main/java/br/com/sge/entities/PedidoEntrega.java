@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import br.com.sge.entities.enums.StatusPedido;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_pedidoEntrega")
+@Table(name = "tb_pedido_entrega")
 public class PedidoEntrega implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -26,8 +28,9 @@ public class PedidoEntrega implements Serializable{
 	private String destino;
 	private LocalDateTime emissao;
 	private LocalDateTime dataEntrega;
-	private StatusPedido statusPedido;
 	
+	@Enumerated(EnumType.STRING)
+	private StatusPedido statusPedido;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente_fk")

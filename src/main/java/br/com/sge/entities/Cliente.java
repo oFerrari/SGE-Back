@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class Cliente implements Serializable{
 	private String endereco;
 	private String telefone;
 	private String email;
+	
+	@JoinColumn(name = "id_cliente_fk")
+	private Cliente cliente;
 	
 	public Cliente() {
 		

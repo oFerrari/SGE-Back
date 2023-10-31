@@ -1,0 +1,9 @@
+{
+  "mercadoria": "Móveis",
+  "origem": "São Paulo",
+  "destino": "Rio de Janeiro",
+  "emissao": "2023-10-27T10:00:00Z",
+  "statusPedido": "PENDENTE",
+  "idClienteFk": 4,
+  "idVeiculoFk": 2
+}

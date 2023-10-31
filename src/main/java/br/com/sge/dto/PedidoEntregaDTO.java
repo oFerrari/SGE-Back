@@ -40,7 +40,7 @@ public class PedidoEntregaDTO implements Serializable {
 	public PedidoEntregaDTO(PedidoEntrega entity) {
 		
 		this.id = entity.getId();
-		this.nomeVeiculo = entity.getCliente().getNome();
+		this.nomeCliente = entity.getCliente().getNome();
 		this.mercadoria = entity.getMercadoria();
 		this.origem = entity.getOrigem();
 		this.destino = entity.getDestino();

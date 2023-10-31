@@ -16,4 +16,4 @@ INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VA
 INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'AJB-8888', '123456789', 'CARROÇA', '500 kg',3);
 INSERT INTO tb_veiculo ( placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'CCC-9999', '123456789', 'CARROÇA', '650 kg',4);
 
-INSERT INTO tb_pedidoEntrega (mercadoria, origem, destino, emissao, dataEntrega, statusPedido, id_cliente_fk, id_veiculo_fk) VALUES ('Mercadoria XYZ', 'Rua A, 123', 'Rua B, 456', '2023-10-25 10:00:00', '2023-10-26 15:00:00', 'PENDENTE', 1, 1);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Mercadoria XYZ', 'Rua A, 123', 'Rua B, 456', '2023-10-25 10:00:00', '2023-10-26 15:00:00', 'PENDENTE', 1, 1);
