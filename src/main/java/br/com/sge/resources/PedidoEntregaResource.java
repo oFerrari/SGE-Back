@@ -16,45 +16,46 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.sge.dto.PedidoEntregaDTO;
+import br.com.sge.dto.PedidoEntregaDTOFORM;
 import br.com.sge.services.PedidoEntregaService;
 
 @RestController
 @RequestMapping(value = "/pedidoEntregas")
 public class PedidoEntregaResource {
-	
+
 	@Autowired
 	private PedidoEntregaService service;
-	
+
 	@GetMapping
 	public ResponseEntity<List<PedidoEntregaDTO>> findAll() {
 		List<PedidoEntregaDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping
 	@RequestMapping(value = "/{id}")
-	public ResponseEntity<PedidoEntregaDTO> findById(@PathVariable Long id){	
+	public ResponseEntity<PedidoEntregaDTO> findById(@PathVariable Long id) {
 		PedidoEntregaDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<PedidoEntregaDTO> insert(@RequestBody PedidoEntregaDTO dto){	
+	public ResponseEntity<PedidoEntregaDTO> insert(@RequestBody PedidoEntregaDTOFORM dto) {
 		service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(null);
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PedidoEntregaDTO> update(@PathVariable Long id, @RequestBody PedidoEntregaDTO dto){ 
-	dto = service.update(id, dto);
-	return ResponseEntity.ok().body(dto);
+	public ResponseEntity<PedidoEntregaDTO> update(@PathVariable Long id, @RequestBody PedidoEntregaDTOFORM dto) {
+		PedidoEntregaDTO form = service.update(id, dto);
+		return ResponseEntity.ok().body(form);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 }

@@ -10,8 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sge.dto.PedidoEntregaDTO;
+import br.com.sge.dto.PedidoEntregaDTOFORM;
+import br.com.sge.entities.Cliente;
 import br.com.sge.entities.PedidoEntrega;
+import br.com.sge.entities.Veiculo;
+import br.com.sge.repositories.ClienteRepository;
 import br.com.sge.repositories.PedidoEntregaRepository;
+import br.com.sge.repositories.VeiculoRepository;
 import br.com.sge.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -19,6 +24,12 @@ import jakarta.persistence.EntityNotFoundException;
 public class PedidoEntregaService {
 	@Autowired
 	private PedidoEntregaRepository repository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private VeiculoRepository veiculoRepository;
 
 	@Transactional(readOnly = true)
 	public List<PedidoEntregaDTO> findAll() {
@@ -36,9 +47,14 @@ public class PedidoEntregaService {
 	}
 
 	@Transactional
-	public PedidoEntregaDTO insert(PedidoEntregaDTO dto) {
+	public PedidoEntregaDTO insert(PedidoEntregaDTOFORM dto) {
+		Veiculo veiculo = veiculoRepository.getReferenceById(dto.getIdVeiculo());
+		Cliente cliente = clienteRepository.getReferenceById(dto.getIdCliente());
+		
 		PedidoEntrega entity = new PedidoEntrega();
 
+		entity.setVeiculo(veiculo);
+		entity.setCliente(cliente);
 		entity.setMercadoria(dto.getMercadoria());
 		entity.setOrigem(dto.getOrigem());
 		entity.setDestino(dto.getDestino());
@@ -52,10 +68,15 @@ public class PedidoEntregaService {
 	}
 
 	@Transactional
-	public PedidoEntregaDTO update(Long id, PedidoEntregaDTO dto) {
+	public PedidoEntregaDTO update(Long id, PedidoEntregaDTOFORM dto) {
 		try {
+			Veiculo veiculo = veiculoRepository.getReferenceById(dto.getIdVeiculo());
+			Cliente cliente = clienteRepository.getReferenceById(dto.getIdCliente());
+			
 			PedidoEntrega entity = repository.getReferenceById(id);
-
+			
+			entity.setVeiculo(veiculo);
+			entity.setCliente(cliente);
 			entity.setMercadoria(dto.getMercadoria());
 			entity.setOrigem(dto.getOrigem());
 			entity.setDestino(dto.getDestino());

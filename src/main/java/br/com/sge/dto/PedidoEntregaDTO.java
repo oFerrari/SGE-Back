@@ -10,6 +10,7 @@ public class PedidoEntregaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
 	private String nomeCliente;
 	private String mercadoria;
 	private String origem;
