@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,10 +71,29 @@ public class ClienteService {
 	}
 
 	public void delete(Long id) {
-		try {
-			repository.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException("O recurso com o ID " + id + " não foi localizado");
-		}
+	    try {
+	        repository.deleteById(id);
+	    } catch (EmptyResultDataAccessException e) {
+	        throw new ResourceNotFoundException("O recurso com o ID " + id + " não foi localizado");
+	    } catch (DataIntegrityViolationException e) {
+            // Lidar com o erro de integridade referencial, se necessário
+            throw new DataIntegrityViolationException("Erro de integridade referencial ao excluir o cliente: " + e.getMessage());
+        }
 	}
+	
+//	@DeleteMapping(value = "/{id}")
+//	public ResponseEntity<String> delete(@PathVariable Long id) {
+//	    try {
+//	        repository.deleteById(id);
+//	        // Exclusão bem-sucedida
+//	        return ResponseEntity.ok("Exclusão bem-sucedida.");
+//	    } catch (DataIntegrityViolationException e) {
+//	        // Lidar com o erro de integridade referencial
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não é possível excluir o cliente, pois está sendo usado em outra parte do sistema.");
+//	    } catch (EmptyResultDataAccessException e) {
+//	        throw new ResourceNotFoundException("O recurso com o ID " + id + " não foi localizado");
+//	    }
+//	}
+
+
 }
