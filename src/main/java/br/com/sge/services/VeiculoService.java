@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sge.dto.VeiculoDTO;
+import br.com.sge.entities.Motorista;
 import br.com.sge.entities.Veiculo;
+import br.com.sge.repositories.MotoristaRepository;
 import br.com.sge.repositories.VeiculoRepository;
 import br.com.sge.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,6 +21,9 @@ import jakarta.persistence.EntityNotFoundException;
 public class VeiculoService {
 	@Autowired
 	private VeiculoRepository repository;
+	
+	@Autowired
+	private MotoristaRepository motoristaRepository;
 
 	@Transactional(readOnly = true)
 	public List<VeiculoDTO> findAll() {
@@ -35,12 +40,14 @@ public class VeiculoService {
 
 	@Transactional
 	public VeiculoDTO insert(VeiculoDTO dto) {
+		Motorista motorista = motoristaRepository.getReferenceById(dto.getMotoristaId());
+		
 		Veiculo entity = new Veiculo();
 		entity.setPlaca(dto.getPlaca());
 		entity.setRenavam(dto.getRenavam());
 		entity.setModelo(dto.getModelo());
 		entity.setCapacidade(dto.getCapacidade());
-		
+		entity.setMotorista(motorista);		
 
 		entity = repository.save(entity);
 
@@ -50,11 +57,13 @@ public class VeiculoService {
 	@Transactional
 	public VeiculoDTO update(Long id, VeiculoDTO dto) {
 		try {
+			Motorista motorista = motoristaRepository.getReferenceById(dto.getMotoristaId());
 			Veiculo entity = repository.getReferenceById(id);
 			entity.setPlaca(dto.getPlaca());
 			entity.setRenavam(dto.getRenavam());
 			entity.setModelo(dto.getModelo());
 			entity.setCapacidade(dto.getCapacidade());
+			entity.setMotorista(motorista);
 			
 
 			entity = repository.save(entity);

@@ -13,6 +13,7 @@ public class VeiculoDTO implements Serializable {
 	private String renavam;
 	private String modelo;
 	private String capacidade;
+	private Long motoristaId;
 	private String nomeMotorista;
 
 	public VeiculoDTO() {
@@ -85,6 +86,14 @@ public class VeiculoDTO implements Serializable {
 
 	public void setNomeMotorista(String nomeMotorista) {
 		this.nomeMotorista = nomeMotorista;
+	}
+
+	public Long getMotoristaId() {
+		return motoristaId;
+	}
+
+	public void setMotoristaId(Long motoristaId) {
+		this.motoristaId = motoristaId;
 	}
 
 	
