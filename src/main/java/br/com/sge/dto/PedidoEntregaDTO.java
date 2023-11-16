@@ -19,6 +19,8 @@ public class PedidoEntregaDTO implements Serializable {
 	private LocalDateTime dataEntrega;
 	private StatusPedido statusPedido;
 	private String nomeVeiculo;
+	private Long clienteId;
+	private Long veiculoId;
 
 	public PedidoEntregaDTO() {
 		
@@ -123,7 +125,23 @@ public class PedidoEntregaDTO implements Serializable {
 		this.nomeVeiculo = nomeVeiculo;
 	}
 
-		
+	public Long getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Long clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public Long getVeiculoId() {
+		return veiculoId;
+	}
+
+	public void setVeiculoId(Long veiculoId) {
+		this.veiculoId = veiculoId;
+	}
+
+	
 
 
 }

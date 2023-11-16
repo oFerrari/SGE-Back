@@ -25,15 +25,11 @@ public class Cliente implements Serializable{
 	private String telefone;
 	private String email;
 	
-	@JoinColumn(name = "id_cliente_fk")
-	private Cliente cliente;
-	
 	public Cliente() {
 		
 	}
 
 	public Cliente(Long id, String nome, String tipo, String documento, String endereco, String telefone, String email) {
-
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
