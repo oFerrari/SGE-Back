@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.sge.dto.PedidoEntregaDTO;
-import br.com.sge.dto.PedidoEntregaDTOFORM;
 import br.com.sge.services.PedidoEntregaService;
 
 @RestController
@@ -40,16 +39,16 @@ public class PedidoEntregaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<PedidoEntregaDTO> insert(@RequestBody PedidoEntregaDTOFORM dto) {
-		service.insert(dto);
+	public ResponseEntity<PedidoEntregaDTO> insert(@RequestBody PedidoEntregaDTO dto) {
+		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(null);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PedidoEntregaDTO> update(@PathVariable Long id, @RequestBody PedidoEntregaDTOFORM dto) {
-		PedidoEntregaDTO form = service.update(id, dto);
-		return ResponseEntity.ok().body(form);
+	public ResponseEntity<PedidoEntregaDTO> update(@PathVariable Long id, @RequestBody PedidoEntregaDTO dto) {
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")

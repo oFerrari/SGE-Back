@@ -21,16 +21,16 @@ import br.com.sge.services.VeiculoService;
 @RestController
 @RequestMapping(value = "/veiculos")
 public class VeiculoResource {
-	
+
 	@Autowired
 	private VeiculoService service;
-	
+
 	@GetMapping
 	public ResponseEntity<List<VeiculoDTO>> findAll() {
 		List<VeiculoDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping
 	@RequestMapping(value = "/{id}")
 	public ResponseEntity<VeiculoDTO> findById(@PathVariable Long id) {
@@ -41,11 +41,7 @@ public class VeiculoResource {
 	@PostMapping
 	public ResponseEntity<VeiculoDTO> insert(@RequestBody VeiculoDTO dto) {
 		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder
-					.fromCurrentRequest()
-					.path("/{id}")
-					.buildAndExpand(dto.getId())
-					.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(null);
 
 	}
@@ -61,5 +57,5 @@ public class VeiculoResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 }

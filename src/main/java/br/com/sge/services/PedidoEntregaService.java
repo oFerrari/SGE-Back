@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sge.dto.PedidoEntregaDTO;
-import br.com.sge.dto.PedidoEntregaDTOFORM;
 import br.com.sge.entities.Cliente;
 import br.com.sge.entities.PedidoEntrega;
 import br.com.sge.entities.Veiculo;
@@ -47,20 +46,20 @@ public class PedidoEntregaService {
 	}
 
 	@Transactional
-	public PedidoEntregaDTO insert(PedidoEntregaDTOFORM dto) {
-		Veiculo veiculo = veiculoRepository.getReferenceById(dto.getIdVeiculo());
-		Cliente cliente = clienteRepository.getReferenceById(dto.getIdCliente());
+	public PedidoEntregaDTO insert(PedidoEntregaDTO dto) {
+		Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
+		Cliente cliente = clienteRepository.getReferenceById(dto.getClienteId());
 		
 		PedidoEntrega entity = new PedidoEntrega();
 
-		entity.setVeiculo(veiculo);
-		entity.setCliente(cliente);
 		entity.setMercadoria(dto.getMercadoria());
 		entity.setOrigem(dto.getOrigem());
 		entity.setDestino(dto.getDestino());
 		entity.setEmissao(dto.getEmissao());
 		entity.setDataEntrega(dto.getDataEntrega());
 		entity.setStatusPedido(dto.getStatusPedido());
+		entity.setVeiculo(veiculo);
+		entity.setCliente(cliente);
 
 		entity = repository.save(entity);
 
@@ -68,21 +67,20 @@ public class PedidoEntregaService {
 	}
 
 	@Transactional
-	public PedidoEntregaDTO update(Long id, PedidoEntregaDTOFORM dto) {
-		try {
-			Veiculo veiculo = veiculoRepository.getReferenceById(dto.getIdVeiculo());
-			Cliente cliente = clienteRepository.getReferenceById(dto.getIdCliente());
+	public PedidoEntregaDTO update(Long id, PedidoEntregaDTO dto) {
+		try {			
+			Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
+			Cliente cliente = clienteRepository.getReferenceById(dto.getClienteId());
 			
-			PedidoEntrega entity = repository.getReferenceById(id);
-			
-			entity.setVeiculo(veiculo);
-			entity.setCliente(cliente);
+			PedidoEntrega entity = repository.getReferenceById(id);			
 			entity.setMercadoria(dto.getMercadoria());
 			entity.setOrigem(dto.getOrigem());
 			entity.setDestino(dto.getDestino());
 			entity.setEmissao(dto.getEmissao());
 			entity.setDataEntrega(dto.getDataEntrega());
 			entity.setStatusPedido(dto.getStatusPedido());
+			entity.setVeiculo(veiculo);
+			entity.setCliente(cliente);
 
 			entity = repository.save(entity);
 

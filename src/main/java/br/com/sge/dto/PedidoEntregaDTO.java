@@ -11,15 +11,15 @@ public class PedidoEntregaDTO implements Serializable {
 
 	private Long id;
 	
-	private String nomeCliente;
 	private String mercadoria;
 	private String origem;
 	private String destino;
 	private LocalDateTime emissao;
 	private LocalDateTime dataEntrega;
 	private StatusPedido statusPedido;
-	private String nomeVeiculo;
+	private String nomeCliente;
 	private Long clienteId;
+	private String nomeVeiculo;
 	private Long veiculoId;
 
 	public PedidoEntregaDTO() {
@@ -50,7 +50,7 @@ public class PedidoEntregaDTO implements Serializable {
 		this.emissao = entity.getEmissao();
 		this.dataEntrega = entity.getDataEntrega();
 		this.statusPedido = entity.getStatusPedido();
-		this.nomeVeiculo = entity.getVeiculo().getPlaca();
+		this.nomeVeiculo = entity.getVeiculo().getModelo();
 	}
 
 	public Long getId() {
