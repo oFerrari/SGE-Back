@@ -1,34 +1,37 @@
 package br.com.sge.entities;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
-public class AdministradorBeta {
-private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "tb_administrador")
+public class Administrador {
+	private static final long serialVersionUID = 1L;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String foto;
-	@Column(unique = true)
 	private String email;
 	private String senha;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_administrador_role",
-			joinColumns = @JoinColumn(name = "associado_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	
+
+	public Administrador() {
+		
+	}	
+
+	public Administrador(Long id, String foto, String email, String senha) {
+		this.id = id;
+		this.foto = foto;
+		this.email = email;
+		this.senha = senha;
+	}
 
 	public Long getId() {
 		return id;
@@ -62,17 +65,9 @@ private static final long serialVersionUID = 1L;
 		this.senha = senha;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, foto, id, roles, senha);
+		return Objects.hash(email, foto, id, senha);
 	}
 
 	@Override
@@ -83,10 +78,12 @@ private static final long serialVersionUID = 1L;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AdministradorBeta other = (AdministradorBeta) obj;
+		Administrador other = (Administrador) obj;
 		return Objects.equals(email, other.email) && Objects.equals(foto, other.foto) && Objects.equals(id, other.id)
-				&& Objects.equals(roles, other.roles) && Objects.equals(senha, other.senha);
+				&& Objects.equals(senha, other.senha);
 	}
+
+	
 	
 	
 }
