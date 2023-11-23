@@ -15,6 +15,7 @@ public class VeiculoDTO implements Serializable {
 	private String capacidade;
 	private Long motoristaId;
 	private String nomeMotorista;
+	private MotoristaDTO motorista;
 
 	public VeiculoDTO() {
 		
@@ -30,14 +31,15 @@ public class VeiculoDTO implements Serializable {
 		this.nomeMotorista = nomeMotorista;
 	}
 	
-	public VeiculoDTO(Veiculo entity) 
-	{
+	public VeiculoDTO(Veiculo entity) {
+		
 		this(entity.getId(),
 			entity.getPlaca(),
 			entity.getRenavam(),
 			entity.getModelo(),
 			entity.getCapacidade(),
 			entity.getMotorista().getNome());
+			this.motorista = new MotoristaDTO(entity.getMotorista());
 	}
 
 	public Long getId() {
@@ -94,6 +96,14 @@ public class VeiculoDTO implements Serializable {
 
 	public void setMotoristaId(Long motoristaId) {
 		this.motoristaId = motoristaId;
+	}
+
+	public MotoristaDTO getMotorista() {
+		return motorista;
+	}
+
+	public void setMotorista(MotoristaDTO motorista) {
+		this.motorista = motorista;
 	}
 
 	
