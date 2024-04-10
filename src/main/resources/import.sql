@@ -26,11 +26,11 @@ INSERT INTO tb_veiculo (placa, renavam, modelo, capacidade, id_motorista_fk) VAL
 INSERT INTO tb_veiculo (placa, renavam, modelo, capacidade, id_motorista_fk) VALUES( 'CCC-9999', '123456789', 'Caminhão Bau', '50 kg',1);
 
 
-INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Soja', 'Fazenda 2S', 'Silos', '2023-11-15 14:00:00', '2023-11-16 16:30:00', 'PENDENTE', 5, 7);
-INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Imoveis', 'Rua A, 123', 'Rua B, 456', '2023-10-25 10:00:00', '2023-10-26 15:00:00', 'PENDENTE', 1, 1);
-INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Mercadoria ABC', 'Rua C, 789', 'Rua D, 012', '2023-11-01 12:30:00', '2023-11-02 14:45:00', 'EM_TRANSITO', 3, 2);
-INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Trelissa de Ferro', 'Avenida E, 345', 'Avenida F, 678', '2023-11-05 08:15:00', '2023-11-06 10:30:00', 'ATRASADO', 3, 3);
-INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Mercadoria GHI', 'Rua H, 901', 'Rua I, 234', '2023-11-10 18:00:00', '2023-11-11 20:15:00', 'CONCLUIDO', 4, 4);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_motorista_fk, id_veiculo_fk) VALUES ('Soja', 'Fazenda 2S', 'Silos', '2023-11-15 14:00:00', '2023-11-16 16:30:00', 'PENDENTE', 5, 1, 7);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_motorista_fk, id_veiculo_fk) VALUES ('Imoveis', 'Rua A, 123', 'Rua B, 456', '2023-10-25 10:00:00', '2023-10-26 15:00:00', 'PENDENTE', 1, 2, 1);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_motorista_fk, id_veiculo_fk) VALUES ('Mercadoria ABC', 'Rua C, 789', 'Rua D, 012', '2023-11-01 12:30:00', '2023-11-02 14:45:00', 'EM_TRANSITO', 3, 3, 2);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_motorista_fk, id_veiculo_fk) VALUES ('Trelissa de Ferro', 'Avenida E, 345', 'Avenida F, 678', '2023-11-05 08:15:00', '2023-11-06 10:30:00', 'ATRASADO', 3, 4, 3);
+INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_motorista_fk, id_veiculo_fk) VALUES ('Mercadoria GHI', 'Rua H, 901', 'Rua I, 234', '2023-11-10 18:00:00', '2023-11-11 20:15:00', 'CONCLUIDO', 4, 5, 4);
 
 
 INSERT INTO tb_administrador (foto, email, senha) VALUES ('assets/dev.jpg', 'andrei@gmail.com', '123456');

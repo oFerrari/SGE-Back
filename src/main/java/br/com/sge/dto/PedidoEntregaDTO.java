@@ -17,10 +17,12 @@ public class PedidoEntregaDTO implements Serializable {
 	private LocalDateTime emissao;
 	private LocalDateTime dataEntrega;
 	private StatusPedido statusPedido;
-	private String nomeCliente;
 	private Long clienteId;
-	private String nomeVeiculo;
+	private String nomeCliente;
+	private Long motoristaId;
+	private String nomeMotorista;
 	private Long veiculoId;
+	private String nomeVeiculo;
 	private VeiculoDTO veiculo;
 	private ClienteDTO cliente;
 
@@ -29,7 +31,7 @@ public class PedidoEntregaDTO implements Serializable {
 	}
 
 	public PedidoEntregaDTO(Long id, String nomeCliente, String mercadoria, String origem, String destino,
-			LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido, String nomeVeiculo) {
+			LocalDateTime emissao, LocalDateTime dataEntrega, StatusPedido statusPedido, String nomeVeiculo, String nomeMotorista) {
 		
 		this.id = id;
 		this.nomeCliente = nomeCliente;
@@ -40,11 +42,13 @@ public class PedidoEntregaDTO implements Serializable {
 		this.dataEntrega = dataEntrega;
 		this.statusPedido = statusPedido;
 		this.nomeVeiculo = nomeVeiculo;
+		this.nomeVeiculo = nomeMotorista;
 	}
 	
 	public PedidoEntregaDTO(PedidoEntrega entity) {
 		
 		this.id = entity.getId();
+		this.clienteId = (entity.getCliente().getId());
 		this.nomeCliente = entity.getCliente().getNome();
 		this.mercadoria = entity.getMercadoria();
 		this.origem = entity.getOrigem();
@@ -52,9 +56,10 @@ public class PedidoEntregaDTO implements Serializable {
 		this.emissao = entity.getEmissao();
 		this.dataEntrega = entity.getDataEntrega();
 		this.statusPedido = entity.getStatusPedido();
-		this.nomeVeiculo = entity.getVeiculo().getModelo();
 		this.veiculoId = (entity.getVeiculo().getId());
-		this.clienteId = (entity.getCliente().getId());
+		this.nomeVeiculo = entity.getVeiculo().getModelo();
+		this.motoristaId = (entity.getMotorista().getId());
+		this.nomeMotorista = entity.getMotorista().getNome();
 		this.veiculo = new VeiculoDTO(entity.getVeiculo());
 		this.cliente = new ClienteDTO(entity.getCliente());
 	}
@@ -155,6 +160,22 @@ public class PedidoEntregaDTO implements Serializable {
 		this.veiculo = veiculo;
 	}
 
+	public String getNomeMotorista() {
+		return nomeMotorista;
+	}
+
+	public void setNomeMotorista(String nomeMotorista) {
+		this.nomeMotorista = nomeMotorista;
+	}
+
+	public Long getMotoristaId() {
+		return motoristaId;
+	}
+
+	public void setMotoristaId(Long motoristaId) {
+		this.motoristaId = motoristaId;
+	}
+
 	public ClienteDTO getCliente() {
 		return cliente;
 	}
@@ -164,6 +185,4 @@ public class PedidoEntregaDTO implements Serializable {
 	}
 
 	
-
-
 }

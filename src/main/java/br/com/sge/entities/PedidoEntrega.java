@@ -40,6 +40,10 @@ public class PedidoEntrega implements Serializable{
 	@JoinColumn(name = "id_veiculo_fk")
 	private Veiculo veiculo;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_motorista_fk")
+	private Motorista motorista;
+	
 	
 	public PedidoEntrega() {
 		
@@ -119,6 +123,14 @@ public class PedidoEntrega implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Motorista getMotorista() {
+		return motorista;
+	}
+
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
 	}
 
 	public Veiculo getVeiculo() {

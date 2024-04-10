@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sge.dto.PedidoEntregaDTO;
 import br.com.sge.entities.Cliente;
+import br.com.sge.entities.Motorista;
 import br.com.sge.entities.PedidoEntrega;
 import br.com.sge.entities.Veiculo;
 import br.com.sge.repositories.ClienteRepository;
+import br.com.sge.repositories.MotoristaRepository;
 import br.com.sge.repositories.PedidoEntregaRepository;
 import br.com.sge.repositories.VeiculoRepository;
 import br.com.sge.services.exceptions.ResourceNotFoundException;
@@ -26,6 +28,9 @@ public class PedidoEntregaService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private MotoristaRepository motoristaRepository;
 	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
@@ -47,8 +52,9 @@ public class PedidoEntregaService {
 
 	@Transactional
 	public PedidoEntregaDTO insert(PedidoEntregaDTO dto) {
-		Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
 		Cliente cliente = clienteRepository.getReferenceById(dto.getClienteId());
+		Motorista motorista = motoristaRepository.getReferenceById(dto.getMotoristaId());
+		Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
 		
 		PedidoEntrega entity = new PedidoEntrega();
 
@@ -69,8 +75,9 @@ public class PedidoEntregaService {
 	@Transactional
 	public PedidoEntregaDTO update(Long id, PedidoEntregaDTO dto) {
 		try {			
-			Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
 			Cliente cliente = clienteRepository.getReferenceById(dto.getClienteId());
+			Motorista motorista = motoristaRepository.getReferenceById(dto.getMotoristaId());
+			Veiculo veiculo = veiculoRepository.getReferenceById(dto.getVeiculoId());
 			
 			PedidoEntrega entity = repository.getReferenceById(id);			
 			entity.setMercadoria(dto.getMercadoria());
@@ -79,8 +86,9 @@ public class PedidoEntregaService {
 			entity.setEmissao(dto.getEmissao());
 			entity.setDataEntrega(dto.getDataEntrega());
 			entity.setStatusPedido(dto.getStatusPedido());
-			entity.setVeiculo(veiculo);
 			entity.setCliente(cliente);
+			entity.setMotorista(motorista);
+			entity.setVeiculo(veiculo);
 
 			entity = repository.save(entity);
 
