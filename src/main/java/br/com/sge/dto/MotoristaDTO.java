@@ -18,6 +18,8 @@ public class MotoristaDTO implements Serializable {
 	private String endereco;
 	private String telefone;
 	private String email;
+	private String senha;
+	private Boolean administrador;
 
 	private List<VeiculoDTO> veiculos = new ArrayList<>();
 

@@ -9,26 +9,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_administrador")
-public class Administrador {
+@Table(name = "tb_usuario")
+public class Usuario {
 	private static final long serialVersionUID = 1L;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String foto;
 	private String email;
 	private String senha;
 	
 	
 
-	public Administrador() {
+	public Usuario() {
 		
 	}	
 
-	public Administrador(Long id, String foto, String email, String senha) {
+	public Usuario(Long id, String foto, String email, String senha) {
 		this.id = id;
-		this.foto = foto;
 		this.email = email;
 		this.senha = senha;
 	}
@@ -39,14 +37,6 @@ public class Administrador {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 
 	public String getEmail() {
@@ -67,7 +57,7 @@ public class Administrador {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, foto, id, senha);
+		return Objects.hash(id, email, senha);
 	}
 
 	@Override
@@ -78,8 +68,8 @@ public class Administrador {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Administrador other = (Administrador) obj;
-		return Objects.equals(email, other.email) && Objects.equals(foto, other.foto) && Objects.equals(id, other.id)
+		Usuario other = (Usuario) obj;
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
 				&& Objects.equals(senha, other.senha);
 	}
 

@@ -2,35 +2,32 @@ package br.com.sge.dto;
 
 import java.io.Serializable;
 
-import br.com.sge.entities.Administrador;
+import br.com.sge.entities.Usuario;
 
 
 
-public class AdministradorDTO implements Serializable {
+public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private String foto;
 	private String email;
 	private String senha;
 
-	public AdministradorDTO() {
+	public UsuarioDTO() {
 		
 	}
 
-	public AdministradorDTO(Long id, String foto, String email, String senha) {
+	public UsuarioDTO(Long id, String foto, String email, String senha) {
 
 		this.id = id;
-		this.foto = foto;
 		this.email = email;
 		this.senha = senha;
 
 	}
 	
-	public AdministradorDTO(Administrador entity) {
+	public UsuarioDTO(Usuario entity) {
 
 		this.id = entity.getId();
-		this.foto = entity.getFoto();
 		this.email = entity.getEmail();
 		this.senha = entity.getSenha();
 	}
@@ -41,14 +38,6 @@ public class AdministradorDTO implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 
 	public String getEmail() {

@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.sge.dto.AdministradorDTO;
-import br.com.sge.services.AdministradorService;
+import br.com.sge.dto.UsuarioDTO;
+import br.com.sge.services.UsuarioService;
 
 @RestController
 @RequestMapping(value = "/administradores")
-public class AdministradorResource {
+public class UsuarioResource {
 	
 	@Autowired
-	private AdministradorService service;
+	private UsuarioService service;
 	
 	@GetMapping
-	public ResponseEntity<List<AdministradorDTO>> findAll() {
-		List<AdministradorDTO> list = service.findAll();
+	public ResponseEntity<List<UsuarioDTO>> findAll() {
+		List<UsuarioDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping
 	@RequestMapping(value = "/{id}")
-	public ResponseEntity<AdministradorDTO> findById(@PathVariable Long id){	
-		AdministradorDTO dto = service.findById(id);
+	public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id){	
+		UsuarioDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<AdministradorDTO> insert(@RequestBody AdministradorDTO dto){	
+	public ResponseEntity<UsuarioDTO> insert(@RequestBody UsuarioDTO dto){	
 		service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(null);
@@ -47,7 +47,7 @@ public class AdministradorResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<AdministradorDTO> update(@PathVariable Long id, @RequestBody AdministradorDTO dto){ 
+	public ResponseEntity<UsuarioDTO> update(@PathVariable Long id, @RequestBody UsuarioDTO dto){ 
 	dto = service.update(id, dto);
 	return ResponseEntity.ok().body(dto);
 	}
