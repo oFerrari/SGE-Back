@@ -1,10 +1,15 @@
 package br.com.sge.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +21,12 @@ public class Modulo {
 
     @Column(nullable = false, unique = true)
     private String nomeModulo;
+
+    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
+    private Set<ModuloAcesso> moduloAcessos = new HashSet<>();
+
+    // Getters e Setters
+
     
 	public Modulo(Long idModulo, String nomeModulo) {
 		this.idModulo = idModulo;
@@ -37,8 +48,6 @@ public class Modulo {
 	public void setNomeModulo(String nomeModulo) {
 		this.nomeModulo = nomeModulo;
 	}
-
-    // Getters and Setters
     
     
 }

@@ -23,6 +23,9 @@ public class ModuloAcesso {
     @JoinColumn(name = "idNivelAcesso", nullable = false)
     private NivelDeAcesso nivelDeAcesso;
 
+    // Getters e Setters
+
+
 	public ModuloAcesso(Long idModuloAcesso, Modulo modulo, NivelDeAcesso nivelDeAcesso) {
 		super();
 		this.idModuloAcesso = idModuloAcesso;

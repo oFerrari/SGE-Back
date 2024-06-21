@@ -23,6 +23,38 @@ public class UsuarioNivelAcesso {
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
-    // Getters and Setters
+	public UsuarioNivelAcesso(Long idUsuarioNivelAcesso, NivelDeAcesso nivelDeAcesso, Usuario usuario) {
+		super();
+		this.idUsuarioNivelAcesso = idUsuarioNivelAcesso;
+		this.nivelDeAcesso = nivelDeAcesso;
+		this.usuario = usuario;
+	}
+
+	public Long getIdUsuarioNivelAcesso() {
+		return idUsuarioNivelAcesso;
+	}
+
+	public void setIdUsuarioNivelAcesso(Long idUsuarioNivelAcesso) {
+		this.idUsuarioNivelAcesso = idUsuarioNivelAcesso;
+	}
+
+	public NivelDeAcesso getNivelDeAcesso() {
+		return nivelDeAcesso;
+	}
+
+	public void setNivelDeAcesso(NivelDeAcesso nivelDeAcesso) {
+		this.nivelDeAcesso = nivelDeAcesso;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+    
 }
+
 

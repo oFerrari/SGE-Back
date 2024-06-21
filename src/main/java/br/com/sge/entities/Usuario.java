@@ -1,10 +1,15 @@
 package br.com.sge.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,14 +28,18 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cnh;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     private String endereco;
     private String telefone;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<UsuarioNivelAcesso> usuarioNivelAcessos = new HashSet<>();
+
 	public Usuario(Long idUsuario, String nome, String email, String senha, String cnh, String cpf, String endereco,
 			String telefone) {
 		this.idUsuario = idUsuario;
