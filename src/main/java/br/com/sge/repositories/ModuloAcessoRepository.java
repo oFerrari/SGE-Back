@@ -3,8 +3,7 @@ package br.com.sge.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.sge.entities.Usuario;
-
+import br.com.sge.entities.ModuloAcesso;
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface ModuloAcessoRepository extends JpaRepository<ModuloAcesso, Long> {
 }
