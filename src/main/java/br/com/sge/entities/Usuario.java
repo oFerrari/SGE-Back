@@ -1,108 +1,79 @@
 package br.com.sge.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "tb_usuario")
 public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+	private static final long serialVersionUID = 1L;
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String email;
+	private String senha;
+	
+	
 
-    @Column(nullable = false, unique = true)
-    private String nome;
+	public Usuario() {
+		
+	}	
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String senha;
-
-    @Column(nullable = false, unique = true)
-    private String cnh;
-
-    @Column(nullable = false, unique = true)
-    private String cpf;
-
-    private String endereco;
-    private String telefone;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<UsuarioNivelAcesso> usuarioNivelAcessos = new HashSet<>();
-
-	public Usuario(Long idUsuario, String nome, String email, String senha, String cnh, String cpf, String endereco,
-			String telefone) {
-		this.idUsuario = idUsuario;
-		this.nome = nome;
+	public Usuario(Long id, String foto, String email, String senha) {
+		this.id = id;
 		this.email = email;
 		this.senha = senha;
-		this.cnh = cnh;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.telefone = telefone;
 	}
-	public Long getIdUsuario() {
-		return idUsuario;
+
+	public Long getId() {
+		return id;
 	}
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getCnh() {
-		return cnh;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, email, senha);
 	}
-	public void setCnh(String cnh) {
-		this.cnh = cnh;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(senha, other.senha);
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+
+	
+	
+	
 }
-
-
-	
-	
-	
-

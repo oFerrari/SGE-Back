@@ -3,7 +3,9 @@ package br.com.sge.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.sge.entities.Modulo;
+import br.com.sge.entities.Motorista;
+
 @Repository
-public interface ModuloRepository extends JpaRepository<Modulo, Long> {
+public interface MotoristaRepository extends JpaRepository <Motorista, Long>{
+
 }
