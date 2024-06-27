@@ -1,4 +1,5 @@
 package br.com.sge.resources;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,33 +11,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sge.entities.Usuario;
-import br.com.sge.services.UsuarioService;
+import br.com.sge.entities.Modulo;
+import br.com.sge.services.ModuloService;
 
 @RestController
-@RequestMapping("/api/usuarios")
-public class UsuarioResource {
+@RequestMapping("/api/modulos")
+public class ModuloResource {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private ModuloService moduloService;
 
     @GetMapping
-    public List<Usuario> getAllUsuarios() {
-        return usuarioService.findAll();
+    public List<Modulo> getAllModulos() {
+        return moduloService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuarioById(@PathVariable Long id) {
-        return usuarioService.findById(id);
+    public Modulo getModuloById(@PathVariable Long id) {
+        return moduloService.findById(id);
     }
 
     @PostMapping
-    public Usuario createUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.save(usuario);
+    public Modulo createModulo(@RequestBody Modulo modulo) {
+        return moduloService.save(modulo);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id) {
-        usuarioService.delete(id);
+    public void deleteModulo(@PathVariable Long id) {
+        moduloService.delete(id);
     }
 }
+
