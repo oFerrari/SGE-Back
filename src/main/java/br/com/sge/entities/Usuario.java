@@ -1,42 +1,72 @@
 package br.com.sge.entities;
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "Usuario")
 public class Usuario {
-	private static final long serialVersionUID = 1L;
-	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String email;
-	private String senha;
-	
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUsuario;
 
-	public Usuario() {
-		
-	}	
+    @Column(nullable = false, unique = true)
+    private String nome;
 
-	public Usuario(Long id, String foto, String email, String senha) {
-		this.id = id;
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String senha;
+
+    @Column(nullable = false, unique = true)
+    private String cnh;
+
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
+    private String endereco;
+    private String telefone;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<UsuarioNivelAcesso> usuarioNivelAcessos = new HashSet<>();
+
+	public Usuario(Long idUsuario, String nome, String email, String senha, String cnh, String cpf, String endereco,
+			String telefone, Set<UsuarioNivelAcesso> usuarioNivelAcessos) {
+		this.idUsuario = idUsuario;
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.cnh = cnh;
+		this.cpf = cpf;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.usuarioNivelAcessos = usuarioNivelAcessos;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -55,25 +85,45 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, email, senha);
+	public String getCnh() {
+		return cnh;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(senha, other.senha);
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
 	}
 
-	
-	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Set<UsuarioNivelAcesso> getUsuarioNivelAcessos() {
+		return usuarioNivelAcessos;
+	}
+
+	public void setUsuarioNivelAcessos(Set<UsuarioNivelAcesso> usuarioNivelAcessos) {
+		this.usuarioNivelAcessos = usuarioNivelAcessos;
+	}
+
 	
 }
