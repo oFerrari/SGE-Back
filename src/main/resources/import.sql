@@ -33,4 +33,4 @@ INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entreg
 INSERT INTO tb_pedido_entrega (mercadoria, origem, destino, emissao, data_entrega, status_pedido, id_cliente_fk, id_veiculo_fk) VALUES ('Mercadoria GHI', 'Rua H, 901', 'Rua I, 234', '2023-11-10 18:00:00', '2023-11-11 20:15:00', 'CONCLUIDO', 4, 4);
 
 
-INSERT INTO tb_administrador (foto, email, senha) VALUES ('assets/dev.jpg', 'andrei@gmail.com', '123456');
+INSERT INTO tb_administrador (foto, email, senha) VALUES ('assets/dev.jpg', 'andrei.vinicius@ifms.edu.br', '123456');
