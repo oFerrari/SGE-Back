@@ -1,5 +1,6 @@
 package br.com.sge.tests;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import br.com.sge.dto.PedidoEntregaDTO;
@@ -46,6 +47,12 @@ public class Factory {
         PedidoEntrega pedidoEntrega = createPedidoEntrega(id);
         return new PedidoEntregaDTO(pedidoEntrega);
     }
+    
+        public static PedidoEntregaDTO createPedidoEntregaDTO() {
+            return new PedidoEntregaDTO(null, "Mercadoria Teste", "Origem Teste", "Destino Teste", LocalDate.now(), LocalDate.now().plusDays(1), "Status Teste", 1L, 1L);
+        }
+
+
 
     // Métodos específicos para criar instâncias com IDs fixos
     public static PedidoEntrega createPedidoEntrega1() {

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,13 @@ public class PedidoEntregaService {
 	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	
+	// Novo método para suporte à paginação
+//    @Transactional(readOnly = true)
+//    public Page<PedidoEntregaDTO> findAllPaged(Pageable pageable) {
+//        Page<PedidoEntrega> result = repository.findAll(pageable); // Busca paginada do repositório
+//        return result.map(PedidoEntregaDTO::new); // Converte a página de PedidoEntrega em PedidoEntregaDTO
+//    }
 
 	@Transactional(readOnly = true)
 	public List<PedidoEntregaDTO> findAll() {

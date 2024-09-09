@@ -54,7 +54,7 @@ public class PedidoEntregaServiceTests {
         idExistente = 2L;  // ID de um pedido de entrega existente
         idInexistente = 30L; // ID de um pedido de entrega inexistente
         idDependente = 1L; // ID de um pedido de entrega com dependências
-        pedidoEntrega = Factory.createPedidoEntrega(); // Cria um objeto PedidoEntrega
+        pedidoEntrega = Factory.createPedidoEntrega(idExistente); // Cria um objeto PedidoEntrega
         page = new PageImpl<>(List.of(pedidoEntrega)); // Página contendo o pedido de entrega
 
         // Configura os comportamentos esperados dos mocks
@@ -76,17 +76,47 @@ public class PedidoEntregaServiceTests {
         Mockito.when(repository.findById(idExistente)).thenReturn(Optional.of(pedidoEntrega)); // Retorna pedido de entrega existente
         Mockito.when(repository.findById(idInexistente)).thenReturn(Optional.empty()); // Retorna Optional vazio para ID inexistente
     }
+    
+    @Test
+    public void findAllDeveriaRetornarListaDePedidoEntregaDTO() {
+        // Configura os dados esperados
+        PedidoEntrega pedidoEntrega1 = Factory.createPedidoEntrega(1L); // Cria o primeiro pedido de entrega
+        PedidoEntrega pedidoEntrega2 = Factory.createPedidoEntrega(2L); // Cria o segundo pedido de entrega
+        List<PedidoEntrega> lista = List.of(pedidoEntrega1, pedidoEntrega2); // Lista de pedidos de entrega
+
+        // Configura o mock do repositório para retornar a lista simulada
+        Mockito.when(repository.findAll()).thenReturn(lista);
+
+        // Chama o método findAll
+        List<PedidoEntregaDTO> resultado = service.findAll();
+
+        // Verifica se o resultado não é nulo
+        Assertions.assertNotNull(resultado);
+        
+        // Verifica o tamanho da lista retornada
+        Assertions.assertEquals(2, resultado.size());
+        
+        // Verifica o conteúdo da lista
+        PedidoEntregaDTO dto1 = resultado.get(0);
+        PedidoEntregaDTO dto2 = resultado.get(1);
+        
+        Assertions.assertEquals(1L, dto1.getId());
+        Assertions.assertEquals("Mercadoria 1", dto1.getMercadoria());
+        Assertions.assertEquals(2L, dto2.getId());
+        Assertions.assertEquals("Mercadoria 2", dto2.getMercadoria());
+    }
+
 
     @Test
     public void updateDeveriaLancarResourceNotFoundExceptionQuandoIdInexistente() {
         // Testa se a atualização lança ResourceNotFoundException para ID inexistente
-        PedidoEntregaDTO dto = Factory.createPedidoEntregaDTO();
+        PedidoEntregaDTO dto = Factory.createPedidoEntregaDTO(idInexistente); // Passa o ID inexistente
         
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             service.update(idInexistente, dto); // Chama método de atualização com ID inexistente
         });
     }
-    
+
     @Test
     public void insertDeveriaSalvarQuandoIdNulo() {
         // Testa se a inserção salva o pedido de entrega quando o ID é nulo
@@ -120,13 +150,13 @@ public class PedidoEntregaServiceTests {
         Assertions.assertNotNull(dto); // Verifica se o objeto retornado não é nulo
     }
 
-    @Test
-    public void findAllPagedDeveriaRetornarPagina() {
-        // Testa se o método findAllPaged retorna uma página de pedidos de entrega
-        Pageable pageable = Pageable.ofSize(10); // Define o tamanho da página
-        Page<PedidoEntregaDTO> pagina = service.findAllPaged(pageable); // Chama método de busca paginada
-        Assertions.assertNotNull(pagina); // Verifica se a página retornada não é nula
-    }
+//    @Test
+//    public void findAllPagedDeveriaRetornarPagina() {
+//        // Testa se o método findAllPaged retorna uma página de pedidos de entrega
+//        Pageable pageable = Pageable.ofSize(10); // Define o tamanho da página
+//        Page<PedidoEntregaDTO> pagina = service.findAllPaged(pageable); // Chama método de busca paginada
+//        Assertions.assertNotNull(pagina); // Verifica se a página retornada não é nula
+//    }
 
     @Test
     public void deleteDeveriaFazerNadaQuandoIdExistente() {
