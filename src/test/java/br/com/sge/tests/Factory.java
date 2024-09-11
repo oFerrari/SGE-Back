@@ -1,10 +1,11 @@
 package br.com.sge.tests;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import br.com.sge.dto.PedidoEntregaDTO;
+import br.com.sge.dto.VeiculoDTO;
 import br.com.sge.entities.Cliente;
+import br.com.sge.entities.Motorista;
 import br.com.sge.entities.PedidoEntrega;
 import br.com.sge.entities.Veiculo;
 import br.com.sge.entities.enums.StatusPedido;
@@ -13,45 +14,60 @@ public class Factory {
 
     // Método para criar uma instância de Cliente com base no ID
     public static Cliente createCliente(Long id) {
-        // Ajustado conforme o construtor da classe Cliente
         return new Cliente(id, "Cliente " + id, "Tipo " + id, "Documento " + id, "Endereco " + id, "(67) 99999-" + (7000 + id), "email" + id + "@teste.com");
     }
 
     // Método para criar uma instância de Veículo com base no ID
     public static Veiculo createVeiculo(Long id) {
-        // Ajustado conforme o construtor da classe Veiculo
         return new Veiculo(id, "Placa " + id, "Renavam " + id, "Modelo " + id, "Capacidade " + id);
     }
     
     // Método para criar uma instância de PedidoEntrega com dados específicos
     public static PedidoEntrega createPedidoEntrega(Long id) {
-        Cliente cliente = createCliente(id % 5 + 1); // Ajusta o cliente baseado no ID
-        Veiculo veiculo = createVeiculo(id % 4 + 1); // Ajusta o veículo baseado no ID
+        Cliente cliente = createCliente(id % 5 + 1);
+        Veiculo veiculo = createVeiculo(id % 4 + 1);
 
         PedidoEntrega pedidoEntrega = new PedidoEntrega();
         pedidoEntrega.setId(id);
         pedidoEntrega.setMercadoria("Mercadoria " + id);
         pedidoEntrega.setOrigem("Origem " + id);
         pedidoEntrega.setDestino("Destino " + id);
-        pedidoEntrega.setEmissao(LocalDateTime.of(2023, 11, 15, 14, 0).plusDays(id)); // Ajuste conforme necessário
-        pedidoEntrega.setDataEntrega(LocalDateTime.of(2023, 11, 16, 16, 30).plusDays(id)); // Ajuste conforme necessário
-        pedidoEntrega.setStatusPedido(StatusPedido.PENDENTE); // Usa a enumeração StatusPedido
+        pedidoEntrega.setEmissao(LocalDateTime.of(2023, 11, 15, 14, 0).plusDays(id));
+        pedidoEntrega.setDataEntrega(LocalDateTime.of(2023, 11, 16, 16, 30).plusDays(id));
+        pedidoEntrega.setStatusPedido(StatusPedido.PENDENTE);
         pedidoEntrega.setCliente(cliente);
         pedidoEntrega.setVeiculo(veiculo);
 
         return pedidoEntrega;
     }
+    
+    public static PedidoEntregaDTO createPedidoEntregaDTO() {
+        PedidoEntregaDTO dto = new PedidoEntregaDTO();
+        
+        // Definindo valores fictícios ou válidos para o DTO
+        dto.setId(null);
+        dto.setMercadoria("Mercadoria Exemplo");
+        dto.setOrigem("Origem Exemplo");
+        dto.setDestino("Destino Exemplo");
+        dto.setEmissao(LocalDateTime.now());
+        dto.setDataEntrega(LocalDateTime.now().plusDays(1));
+        dto.setStatusPedido(StatusPedido.PENDENTE); // Usa o enum diretamente
 
-    // Método para criar uma instância de PedidoEntregaDTO com dados específicos
+        // Criando e atribuindo um Veiculo válido com Motorista
+        Veiculo veiculo = new Veiculo();
+        Motorista motorista = new Motorista();
+        motorista.setNome("Nome Motorista"); // Definindo um nome para evitar null
+        veiculo.setMotorista(motorista); // Definindo motorista para evitar null
+        dto.setVeiculo(new VeiculoDTO(veiculo)); // Ajuste necessário na criação do DTO
+
+        return dto;
+    }
+
+    // Método para criar uma instância de PedidoEntregaDTO com base em PedidoEntrega
     public static PedidoEntregaDTO createPedidoEntregaDTO(Long id) {
         PedidoEntrega pedidoEntrega = createPedidoEntrega(id);
         return new PedidoEntregaDTO(pedidoEntrega);
     }
-    
-        public static PedidoEntregaDTO createPedidoEntregaDTO() {
-            return new PedidoEntregaDTO(null, "Mercadoria Teste", "Origem Teste", "Destino Teste", LocalDate.now(), LocalDate.now().plusDays(1), "Status Teste", 1L, 1L);
-        }
-
 
 
     // Métodos específicos para criar instâncias com IDs fixos
@@ -95,3 +111,4 @@ public class Factory {
         return createPedidoEntregaDTO(5L);
     }
 }
+

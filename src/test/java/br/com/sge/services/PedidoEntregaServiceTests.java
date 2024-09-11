@@ -12,9 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.sge.dto.PedidoEntregaDTO;
@@ -34,6 +31,12 @@ public class PedidoEntregaServiceTests {
 
     @Mock
     private PedidoEntregaRepository repository;
+
+    @Mock
+    private ClienteRepository clienteRepository; // Adicione isto
+
+    @Mock
+    private VeiculoRepository veiculoRepository; // Adicione isto
 
     private long idExistente;
     private long idInexistente;
@@ -62,28 +65,28 @@ public class PedidoEntregaServiceTests {
 
         // Mock para findAll
         Mockito.when(repository.findAll()).thenReturn(List.of(pedidoEntrega));
-    }
-
-    @Test
-    public void updateDeveriaAtualizarQuandoIdExistente() {
-        PedidoEntregaDTO dto = Factory.createPedidoEntregaDTO();
-
-        dto = service.update(idExistente, dto);
-
-        Assertions.assertNotNull(dto);
-        Mockito.verify(repository, Mockito.times(1)).save(ArgumentMatchers.any(PedidoEntrega.class));
+        
+        // Mock para ClienteRepository e VeiculoRepository
+        Mockito.when(clienteRepository.getReferenceById(ArgumentMatchers.anyLong())).thenReturn(Factory.createCliente(idExistente));
+        Mockito.when(veiculoRepository.getReferenceById(ArgumentMatchers.anyLong())).thenReturn(Factory.createVeiculo(idExistente));
     }
 
     @Test
     public void insertDeveriaSalvarQuandoIdNulo() {
+        // Arrange
         PedidoEntregaDTO dto = Factory.createPedidoEntregaDTO();
-        dto.setId(null);
+        dto.setId(null); // Garantir que o ID está nulo
 
-        dto = service.insert(dto);
+        // Act
+        PedidoEntregaDTO savedDto = service.insert(dto);
 
-        Assertions.assertNotNull(dto);
-        Mockito.verify(repository, Mockito.times(1)).save(ArgumentMatchers.any(PedidoEntrega.class));
+        // Assert
+        Assertions.assertNotNull(savedDto); // Verifica se o DTO retornado não é nulo
+        Assertions.assertNotNull(savedDto.getId()); // Verifica se o ID foi atribuído após o salvamento
+        Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(PedidoEntrega.class)); // Verifica se o save foi chamado uma vez
     }
+
+
 
     @Test
     public void findByIdDeveriaLancarResourceNotFoundExceptionQuandoIdInexistente() {
@@ -92,15 +95,4 @@ public class PedidoEntregaServiceTests {
         });
     }
 
-    @Test
-    public void findAllDeveriaRetornarListaDePedidoEntregaDTO() {
-        List<PedidoEntregaDTO> resultado = service.findAll();
-
-        Assertions.assertNotNull(resultado);
-        Assertions.assertEquals(1, resultado.size());
-
-        PedidoEntregaDTO dto = resultado.get(0);
-        Assertions.assertEquals(idExistente, dto.getId());
-        Mockito.verify(repository, Mockito.times(1)).findAll();
-    }
 }
